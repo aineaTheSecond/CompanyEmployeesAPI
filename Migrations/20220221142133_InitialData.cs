@@ -9,14 +9,6 @@ namespace CompanyEmployeesAPI.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<int>(
-                name: "Age",
-                table: "Employees",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
-
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "CompanyId", "Address", "Country", "Name" },
@@ -25,7 +17,7 @@ namespace CompanyEmployeesAPI.Migrations
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "CompanyId", "Address", "Country", "Name" },
-                values: new object[] { new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"), "583 Wall Dr. Gwynn Oak, MD 21207", "USA", "IT Solutions LTD" });
+                values: new object[] { new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"), "583 Wall Dr. Gwynn Oak, MD 21207", "USA", "IT_Solutions Ltd" });
 
             migrationBuilder.InsertData(
                 table: "Employees",
@@ -69,14 +61,6 @@ namespace CompanyEmployeesAPI.Migrations
                 table: "Companies",
                 keyColumn: "CompanyId",
                 keyValue: new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"));
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Age",
-                table: "Employees",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "int");
         }
     }
 }
