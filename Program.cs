@@ -1,4 +1,5 @@
 using CompanyEmployeesAPI.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -9,14 +10,13 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nl
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureRepositoryManager();
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
-if(app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
-else 
+if(app.Environment.IsProduction())
     app.UseHsts();
 
 app.UseHttpsRedirection();
