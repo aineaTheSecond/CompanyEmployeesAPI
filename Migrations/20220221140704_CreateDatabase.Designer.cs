@@ -12,8 +12,8 @@ using Repository;
 namespace CompanyEmployeesAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220213081636_DatabaseCreation")]
-    partial class DatabaseCreation
+    [Migration("20220221140704_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,10 +55,6 @@ namespace CompanyEmployeesAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("EmployeeId");
-
-                    b.Property<string>("Age")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
