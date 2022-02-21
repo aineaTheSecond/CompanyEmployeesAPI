@@ -1,5 +1,4 @@
 using CompanyEmployeesAPI.Extensions;
-using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -11,6 +10,8 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureServiceManager();
+builder.Services.COnfigureSqlContext(builder.Configuration);
 
 builder.Services.AddControllers();
 
