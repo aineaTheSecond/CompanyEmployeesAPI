@@ -12,7 +12,7 @@ using Repository;
 namespace CompanyEmployeesAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220213085956_InitialData")]
+    [Migration("20220221142133_InitialData")]
     partial class InitialData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace CompanyEmployeesAPI.Migrations
                             Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                             Address = "583 Wall Dr. Gwynn Oak, MD 21207",
                             Country = "USA",
-                            Name = "IT Solutions LTD"
+                            Name = "IT_Solutions Ltd"
                         },
                         new
                         {
@@ -72,8 +72,7 @@ namespace CompanyEmployeesAPI.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("EmployeeId");
 
-                    b.Property<int?>("Age")
-                        .IsRequired()
+                    b.Property<int>("Age")
                         .HasColumnType("int");
 
                     b.Property<Guid>("CompanyId")

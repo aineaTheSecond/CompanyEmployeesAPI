@@ -12,8 +12,8 @@ using Repository;
 namespace CompanyEmployeesAPI.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220213082801_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20220221141713_AddAgeField")]
+    partial class AddAgeField
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,9 +56,8 @@ namespace CompanyEmployeesAPI.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("EmployeeId");
 
-                    b.Property<string>("Age")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
