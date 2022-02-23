@@ -15,7 +15,10 @@ builder.Services.ConfigureServiceManager();
 builder.Services.COnfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddControllers().AddApplicationPart(typeof(CompanyEmployeesAPI.Presentation.AssemblyReference).Assembly);
+builder.Services.AddControllers(config => { 
+    config.RespectBrowserAcceptHeader = true;
+}).AddXmlDataContractSerializerFormatters()
+.AddApplicationPart(typeof(CompanyEmployeesAPI.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
 
