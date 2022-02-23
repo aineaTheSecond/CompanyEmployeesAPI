@@ -17,7 +17,9 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers(config => { 
     config.RespectBrowserAcceptHeader = true;
+    config.ReturnHttpNotAcceptable = true;
 }).AddXmlDataContractSerializerFormatters()
+.AddCustomCsvFormatter()
 .AddApplicationPart(typeof(CompanyEmployeesAPI.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
