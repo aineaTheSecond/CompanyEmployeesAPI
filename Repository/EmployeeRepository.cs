@@ -24,5 +24,10 @@ namespace Repository
             employee.CompanyId = companyId;
             Create(employee);
         }
+
+        void IEmployeeRepository.DeleteEmployeeeForCompany(Employee employee)
+        {
+            Delete(employee);
+        }
     }
 }
