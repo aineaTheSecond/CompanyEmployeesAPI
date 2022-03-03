@@ -25,7 +25,7 @@ namespace Repository
             Create(employee);
         }
 
-        void IEmployeeRepository.DeleteEmployeeeForCompany(Employee employee)
+        void IEmployeeRepository.DeleteEmployeeForCompany(Employee employee)
         {
             Delete(employee);
         }

@@ -65,7 +65,7 @@ namespace Service
             return employeeToReturn;
         }
 
-        void IEmployeeService.DeleteEmployeeForCompany(Guid companyId, Guid id, bool trackChanges)
+        public void DeleteEmployeeForCompany(Guid companyId, Guid id, bool trackChanges)
         {
             var company = _repository.Company.GetCompany(companyId, trackChanges);
             if(company is null)
@@ -75,7 +75,21 @@ namespace Service
             if (employeeForCompany is null)
                 throw new EmployeeNotFoundException(id);
 
-            _repository.Employee.DeleteEmployeeeForCompany(employeeForCompany);
+            _repository.Employee.DeleteEmployeeForCompany(employeeForCompany);
+            _repository.Save();
+        }
+
+       public void UpdateEmployeeForCompany(Guid companyId, Guid id, EmployeeForUpdateDto employeeForUpdate, bool compTrackChanges, bool empTrackChanges)
+        {
+            var company = _repository.Company.GetCompany(companyId, compTrackChanges);
+            if (company is null)
+                throw new CompanyNotFoundException(companyId);
+
+            var employeeEntity = _repository.Employee.GetEmployee(companyId, id, empTrackChanges);
+            if (employeeEntity is null)
+                throw new EmployeeNotFoundException(id);
+
+            _mapper.Map(employeeForUpdate, employeeEntity);
             _repository.Save();
         }
     }
