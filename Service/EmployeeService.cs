@@ -4,6 +4,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace Service
 {
@@ -30,13 +31,14 @@ namespace Service
             return employee;
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(Guid companyId, bool trackChanges)
+        public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges)
         {
             await CheckIfCompanyExists(companyId, trackChanges);
 
-            var employeesFromDb = await _repository.Employee.GetEmployees(companyId, trackChanges);
-            var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesFromDb);
-            return employeesDto;
+            var employeesWithMetadata = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges);
+
+            var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWithMetadata);
+            return (employees: employeesDto, metaData: employeesWithMetadata.MetaData);
         }
 
         public async Task<EmployeeDto> CreateEmployeeForCompanyAsync(Guid companyId, EmployeeForCreationDto employeeForCreation, bool trackChanges)
@@ -97,7 +99,7 @@ namespace Service
 
         public async Task<Employee> GetEmployeeForCompanyAndCheckIfItExists(Guid companyId, Guid id, bool trackChanges)
         {
-            var employee = await _repository.Employee.GetEmployee(companyId, id, trackChanges);
+            var employee = await _repository.Employee.GetEmployeeAsync(companyId, id, trackChanges);
             if (employee is null)
                 throw new EmployeeNotFoundException(id);
 
